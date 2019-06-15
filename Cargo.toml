@@ -1,6 +1,6 @@
 [package]
 name = "diesel-chrono-duration"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["Victor Polevoy <maintainer@vpolevoy.com>"]
 
 description = "Adds chrono::Duration support to the diesel"
