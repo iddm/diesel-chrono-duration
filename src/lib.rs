@@ -3,21 +3,18 @@
 //! This crate implements storage functionality for the `chrono::Duration` type.
 //! It could be included into the `diesel` itself but its policy does not allow that.
 //!
-//! ## Installation
+//! ## Usage
 //!
-//! Add the following dependency to your project's `Cargo.toml`:
+//! And add this to your root file (in rust 2015 edition):
 //!
-//! ```toml
-//! [dependencies]
-//! diesel-chrono-duration = "0.1"
-//! ```
-//!
-//! And add this to your root file:
-//!
-//! ```no_run
+//! ```rust,no_run
 //! extern crate diesel_chrono_duration;
 //! ```
+//!
+//! In rust 2018 edition you don't need to specify the `extern crate` thing.
+//! Then use the [`ChronoDurationProxy`](https://docs.rs/diesel-chrono-duration) type instead of vanilla [`chrono::Duration`](https://docs.rs/chrono/0.4.6/chrono/struct.Duration.html).
 
+#![warn(missing_docs)]
 extern crate chrono;
 #[macro_use]
 extern crate diesel;
@@ -29,6 +26,8 @@ use diesel::deserialize::{self, FromSql};
 use diesel::serialize::{self, Output, ToSql};
 use diesel::sql_types::BigInt;
 
+/// A proxy type for which the diesel traits are implemented. Use this type whenever
+/// you want to operate with `chrono::Duration`.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, FromSqlRow, AsExpression)]
 #[sql_type = "BigInt"]
 pub struct ChronoDurationProxy(pub chrono::Duration);
