@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: cargo build --verbose
+    - name: Run tests
+      run: cargo test --verbose
+    - name: Cache
+      uses: actions/cache@v2.1.2
+      with:
+        # A list of files, directories, and wildcard patterns to cache and restore
+        path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            examples/target
+        # An explicit key for restoring and saving the cache
+        key: ${{ runner.os }}-examples-${{ steps.tc.outputs.rustc_hash }}-${{ hashFiles('**/Cargo.toml') }}
