@@ -1,5 +1,5 @@
 # diesel-chrono-duration
-[![](https://meritbadge.herokuapp.com/diesel-chrono-duration)](https://crates.io/crates/diesel-chrono-duration) [![](https://travis-ci.org/vityafx/diesel-chrono-duration.svg?branch=master)](https://travis-ci.org/vityafx/diesel-chrono-duration) [![](https://docs.rs/diesel-chrono-duration/badge.svg)](https://docs.rs/diesel-chrono-duration)
+[![](https://meritbadge.herokuapp.com/diesel-chrono-duration)](https://crates.io/crates/diesel-chrono-duration) [![](https://travis-ci.org/vityafx/diesel-chrono-duration.svg?branch=master)](https://travis-ci.org/vityafx/diesel-chrono-duration) ![CI](https://github.com/vityafx/diesel-chrono-duration/workflows/CI/badge.svg) [![](https://docs.rs/diesel-chrono-duration/badge.svg)](https://docs.rs/diesel-chrono-duration)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 
