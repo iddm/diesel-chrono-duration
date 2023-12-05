@@ -11,6 +11,7 @@
 
 use diesel::backend::Backend;
 use diesel::deserialize::{self, FromSql};
+use diesel::query_builder::bind_collector::RawBytesBindCollector;
 use diesel::serialize::{self, Output, ToSql};
 use diesel::sql_types::BigInt;
 use diesel::{AsExpression, FromSqlRow};
@@ -44,7 +45,7 @@ impl std::ops::Deref for ChronoDurationProxy {
 impl<DB> ToSql<BigInt, DB> for ChronoDurationProxy
 where
     i64: ToSql<BigInt, DB>,
-    DB: Backend,
+    for<'c> DB: Backend + Backend<BindCollector<'c> = RawBytesBindCollector<DB>>,
 {
     fn to_sql<'b>(&'b self, out: &mut Output<'b, '_, DB>) -> serialize::Result {
         if let Some(num_nanoseconds) = self.0.num_nanoseconds() {
