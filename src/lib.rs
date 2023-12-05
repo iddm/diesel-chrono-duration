@@ -5,31 +5,20 @@
 //!
 //! ## Usage
 //!
-//! And add this to your root file (in rust 2015 edition):
-//!
-//! ```rust,no_run
-//! extern crate diesel_chrono_duration;
-//! ```
-//!
-//! In rust 2018 edition you don't need to specify the `extern crate` thing.
-//! Then use the [`ChronoDurationProxy`](https://docs.rs/diesel-chrono-duration) type instead of vanilla [`chrono::Duration`](https://docs.rs/chrono/0.4.6/chrono/struct.Duration.html).
+//! Just use the [`ChronoDurationProxy`](https://docs.rs/diesel-chrono-duration) type instead of vanilla [`chrono::Duration`](https://docs.rs/chrono/0.4.6/chrono/struct.Duration.html).
 
 #![warn(missing_docs)]
-extern crate chrono;
-#[macro_use]
-extern crate diesel;
-
-use std::io::Write;
 
 use diesel::backend::Backend;
 use diesel::deserialize::{self, FromSql};
 use diesel::serialize::{self, Output, ToSql};
 use diesel::sql_types::BigInt;
+use diesel::{AsExpression, FromSqlRow};
 
 /// A proxy type for which the diesel traits are implemented. Use this type whenever
 /// you want to operate with `chrono::Duration`.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, FromSqlRow, AsExpression)]
-#[sql_type = "BigInt"]
+#[diesel(sql_type = BigInt)]
 pub struct ChronoDurationProxy(pub chrono::Duration);
 
 impl From<chrono::Duration> for ChronoDurationProxy {
@@ -57,9 +46,10 @@ where
     i64: ToSql<BigInt, DB>,
     DB: Backend,
 {
-    fn to_sql<W: Write>(&self, out: &mut Output<W, DB>) -> serialize::Result {
+    fn to_sql<'b>(&'b self, out: &mut Output<'b, '_, DB>) -> serialize::Result {
         if let Some(num_nanoseconds) = self.0.num_nanoseconds() {
-            ToSql::<BigInt, DB>::to_sql(&num_nanoseconds, out)
+            //<i64 as ToSql<BigInt, DB>>::to_sql(&num_nanoseconds, &mut out.reborrow())
+            num_nanoseconds.to_sql(&mut out.reborrow())
         } else {
             Err(format!("{:?} as nanoseconds is too large to fit in an i64", self).into())
         }
@@ -71,7 +61,7 @@ where
     i64: FromSql<BigInt, DB>,
     DB: Backend,
 {
-    fn from_sql(value: Option<&<DB as Backend>::RawValue>) -> deserialize::Result<Self> {
+    fn from_sql(value: DB::RawValue<'_>) -> deserialize::Result<Self> {
         let i64_value = <i64 as FromSql<BigInt, DB>>::from_sql(value)?;
         Ok(chrono::Duration::nanoseconds(i64_value).into())
     }

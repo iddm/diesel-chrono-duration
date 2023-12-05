@@ -1,19 +1,15 @@
 [package]
 name = "diesel-chrono-duration"
-version = "1.0.0"
+version = "1.1.0"
 authors = ["Victor Polevoy <maintainer@vpolevoy.com>"]
-
+edition = "2021"
 description = "Adds chrono::Duration support to the diesel"
 readme = "README.md"
 license = "MIT"
 keywords = ["diesel", "time", "chrono", "duration"]
-
-repository = "https://github.com/vityafx/diesel-chrono-duration"
+repository = "https://github.com/iddm/diesel-chrono-duration"
 documentation = "https://docs.rs/diesel-chrono-duration"
 
-[badges]
-travis-ci = { repository = "vityafx/diesel-chrono-duration" }
-
 [dependencies]
-diesel = "1"
+diesel = "2"
 chrono = "0.4"

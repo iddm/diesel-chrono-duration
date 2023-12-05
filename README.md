@@ -1,5 +1,5 @@
 # diesel-chrono-duration
-[![](https://meritbadge.herokuapp.com/diesel-chrono-duration)](https://crates.io/crates/diesel-chrono-duration) [![](https://travis-ci.org/vityafx/diesel-chrono-duration.svg?branch=master)](https://travis-ci.org/vityafx/diesel-chrono-duration) ![CI](https://github.com/vityafx/diesel-chrono-duration/workflows/CI/badge.svg) [![](https://docs.rs/diesel-chrono-duration/badge.svg)](https://docs.rs/diesel-chrono-duration)
+[![](https://meritbadge.herokuapp.com/diesel-chrono-duration)](https://crates.io/crates/diesel-chrono-duration) [![](https://travis-ci.org/iddm/diesel-chrono-duration.svg?branch=master)](https://travis-ci.org/iddm/diesel-chrono-duration) ![CI](https://github.com/iddm/diesel-chrono-duration/workflows/CI/badge.svg) [![](https://docs.rs/diesel-chrono-duration/badge.svg)](https://docs.rs/diesel-chrono-duration)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 
@@ -51,4 +51,4 @@ The project is very simple and small but all contributions are "please make a co
 
 ## License
 
-This project is [licensed under the MIT license](https://github.com/vityafx/diesel-chrono-duration/blob/master/LICENSE).
+This project is [licensed under the MIT license](https://github.com/iddm/diesel-chrono-duration/blob/master/LICENSE).
